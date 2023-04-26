@@ -12,6 +12,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_code(prompt):
+    # return "def get_string(x,y):\n    return str(x)+str(y)"
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -27,31 +28,28 @@ def generate_code(prompt):
         ]
     )
 
-    message_string = response.choices[0].message.content
-    print(message_string)
-    json_string = re.search("{(\r\n|\r|\n|.)*\"code\":(\r\n|\r|\n|.)*\"explanation\":(\r\n|\r|\n|.)*}", message_string).group()
-    print(json_string)
-    json_dict = json.loads(json_string)
-    code = json_dict["code"]
-
-    return code
+    try:
+        message_string = response.choices[0].message.content
+        print(message_string)
+        json_string = re.search("{(\r\n|\r|\n|.)*\"code\":(\r\n|\r|\n|.)*\"explanation\":(\r\n|\r|\n|.)*}", message_string).group()
+        print(json_string)
+        json_dict = json.loads(json_string)
+        code = json_dict["code"]
+        explanation = json_dict["explanation"]
+        return code
+    except:
+        return message_string
 
 
 problems = read_problems()
 
-# print(problems)
+# print(problems["DSP/0"])
 
-# problems = {"DSP/0": problems["DSP/0"]}
-
-# print(problems)
-
-num_samples = 5
+num_samples = 1
 samples = [
-    dict(task_id=task_id, completion=generate_code(problems[task_id]["prompt"]))
+    # dict(task_id=task_id, completion=generate_code(problems[task_id]["prompt"]))
+    dict(task_id=task_id, prompt=problems[task_id]["prompt"], completion=generate_code(problems[task_id]["prompt"]), test=problems[task_id]["test"])
     for task_id in problems
     for _ in range(num_samples)
 ]
 write_jsonl("samples.jsonl", samples)
-
-# print(generate_code("#### Question 9\nComplete the function to output a dictionary with both the sum of even and odd digits with the\nkeys 'even' and 'odd' respectively"))
-
