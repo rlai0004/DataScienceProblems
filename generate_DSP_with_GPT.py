@@ -2,6 +2,7 @@ import openai
 from dotenv import load_dotenv
 import os
 import re
+import time
 import json
 
 from data_science_problems.read import read_problems
@@ -46,10 +47,23 @@ problems = read_problems()
 # print(problems["DSP/0"])
 
 num_samples = 1
-samples = [
-    # dict(task_id=task_id, completion=generate_code(problems[task_id]["prompt"]))
-    dict(task_id=task_id, prompt=problems[task_id]["prompt"], completion=generate_code(problems[task_id]["prompt"]), test=problems[task_id]["test"])
-    for task_id in problems
-    for _ in range(num_samples)
-]
+samples = []
+# samples = [
+#     # dict(task_id=task_id, completion=generate_code(problems[task_id]["prompt"]))
+#     dict(task_id=task_id, prompt=problems[task_id]["prompt"], completion=generate_code(problems[task_id]["prompt"]), test=problems[task_id]["test"])
+#     for task_id in problems
+#     for _ in range(num_samples)
+# ]
+for task_id in problems:
+    if int(task_id.split("/")[1]) < 20: 
+        for _ in range(num_samples): 
+            completion = ""
+            try:
+                completion = generate_code(problems[task_id]["prompt"])
+            except:  # handle any exceptions raised by the generate_code function
+                completion = 'Failed to extract the code snippet'
+            samples.append(dict(task_id=task_id, completion=completion))
+            if len(samples) % 3 == 0:  # wait for 1 minute every 3 requests
+                time.sleep(60)
+
 write_jsonl("samples.jsonl", samples)
