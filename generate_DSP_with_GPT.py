@@ -12,25 +12,29 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def generate_code(prompt):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a Jupyter Notebook code assistant for data scientists."},
-            {"role": "user", "content": "I will supply prompts as markdown text. Please generate code based on the prompts."},
-            {"role": "assistant",
-                "content": "Sure, I'd be happy to help! Please provide me with the first prompt."},
-            {"role": "user", "content": "Please give your generated code and explanations in JSON format like this: {\"code\": <your code here>, \"explanation\": <your explanation here>}."},
-            {"role": "assistant",
-                "content": "Understood, I'll provide the code and explanations in JSON format as requested. Let's get started!"},
-            {"role": "user",
-                "content": prompt}
-        ]
-    )
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                # {"role": "system", "content": "You are a Jupyter Notebook code assistant for data scientists."},
+                {"role": "user", "content": "I will supply prompts as markdown text. Please generate code based on the prompts."},
+                {"role": "assistant",
+                    "content": "Sure, I'm ready to generate code based on your prompts. Please feel free to provide the prompts and any additional details or requirements you might have."},
+                {"role": "user", "content": "Please only provide the generated code in your answer. Do not include any other text"},
+                {"role": "assistant",
+                    "content": "Understood, I will only provide the generated code in my answers. Please provide the prompts and any additional details or requirements you might have."},
+                {"role": "user",
+                    "content": prompt}
+            ]
+        )
+    except:
+        return "Failed to generate using GPT. Please try again."
     try:
         message_string = response.choices[0].message.content
         # print(message_string)
-        json_string = re.search(
-            "{(\r\n|\r|\n|.)*\"code\":(\r\n|\r|\n|.)*\"explanation\":(\r\n|\r|\n|.)*}", message_string).group()
+        # json_string = re.search(
+        #     "{(\r\n|\r|\n|.)*\"code\":(\r\n|\r|\n|.)*\"explanation\":(\r\n|\r|\n|.)*}", message_string).group()
+        json_string = re.sub("```.*\n*", "", message_string)
         # print(json_string)
         json_dict = json.loads(json_string)
         code = json_dict["code"]
@@ -40,11 +44,27 @@ def generate_code(prompt):
         return message_string
 
 
+# message_string = "```python\n# Check the data\nMR_df.head()\n\ndef convert_label(label):\n    if label == 'pos':\n        return 1.0 \n    elif label == 'neg':\n        return 0.0\n    else: \n        return label\n\nMR_df['y'] = MR_df['label'].apply(convert_label)\n\nassert callable(convert_label)\n```"
+
+# regex = "```.*\n*"
+
+# # json_string = re.search(
+# #     regex, message_string).group()
+# # print(json_string)
+
+# replaced_string = re.sub(regex, "", message_string)
+# print(replaced_string)
+
 problems = read_problems()
 num_samples = 1
 samples = []
+
+upper = 499
+lower = 500
+
 for task_id in problems:
-    if int(task_id.split("/")[1]) < 500:
+    if upper < int(task_id.split("/")[1]) <= lower:
+        print(f"\n{task_id}")
         for _ in range(num_samples):
             completion = ""
             try:
@@ -56,4 +76,4 @@ for task_id in problems:
             samples.append(dict(task_id=task_id, completion=completion))
             # if len(samples) % 3 == 0:  # wait for 1 minute every 3 requests
             #     time.sleep(60)
-write_jsonl("samples.jsonl", samples)
+write_jsonl(f"samples_{upper}_{lower}.jsonl", samples)
