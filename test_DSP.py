@@ -20,7 +20,8 @@ def evaluate(path):
             if "#### GENERATED" in source:
 #                 print(task_id)
                 test = cells_json[idx+1]["outputs"]
-                # print(task_id, has_no_error(test))
+                if not has_no_error(test):
+                    print(f"{task_id} had an error")
                 return has_no_error(test), task_id
             
 
@@ -31,31 +32,40 @@ def has_no_error(x):
     return True
 
 
+# reliability_guard()
+
 out_file = "generated.txt"
 
 with open(out_file) as f:
     ps = f.readlines()
 
-for line in ps:
-    # notebook_filename = "juice-github-repos\mwizasimbeye11.data-science-africa-2018-abuja\data-science-africa-2018-abuja-master\PythonBasicsx.task_id.0.0.ipynb"
-    notebook_filename = Path(line.strip())
-    # print(notebook_filename)
-    nb = nbformat.read(notebook_filename, as_version=4)
-    # print(nb)
-    parent = notebook_filename.parent
-    # print(parent)
-    client = NotebookClient(nb, 
-        timeout=10, 
-        kernel_name="python3", 
-        resources= {'metadata': {'path': parent}}, 
-        allow_errors=True
-    )
-    # print(client)
-    # print("trying to execute")
-    enb = client.execute()
-    # print(notebook_filename)
-    nbformat.write(enb, notebook_filename)
-    # print(notebook_filename)
+error_file = "errors.txt"
+with open(error_file, "w") as ferr:
+    for line in ps:
+        # notebook_filename = "juice-github-repos\mwizasimbeye11.data-science-africa-2018-abuja\data-science-africa-2018-abuja-master\PythonBasicsx.task_id.0.0.ipynb"
+        notebook_filename = Path(line.strip())
+        print(f"executing {notebook_filename}")
+        nb = nbformat.read(notebook_filename, as_version=4)
+        # print(nb)
+        parent = notebook_filename.parent
+        # print(parent)
+        client = NotebookClient(nb, 
+            timeout=10, 
+            kernel_name="python3", 
+            resources= {'metadata': {'path': parent}}, 
+            allow_errors=True
+        )
+        # print(client)
+        # print("trying to execute")
+        try:
+            enb = client.execute()
+            nbformat.write(enb, notebook_filename)
+        except:
+            print(notebook_filename, file=ferr)
+            print(f"something went wrong with {notebook_filename}")
+        # print(notebook_filename)
+        # nbformat.write(enb, notebook_filename)
+        # print(notebook_filename)
 
 print("Complute pass@k for the executed notebooks.")
 with open(out_file) as f:
