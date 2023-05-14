@@ -69,6 +69,34 @@ def execute(notebook_filename, actor, ferr):
     print(notebook_filename)
 
 
+def my_execute(notebook_filename, ferr):
+    notebook_filename = Path(notebook_filename.strip())
+    print(notebook_filename)
+    nb = nbformat.read(notebook_filename, as_version=4)
+    # print(nb)
+    parent = notebook_filename.parent
+    print(parent)
+    client = NotebookClient(nb, 
+        timeout=10, 
+        kernel_name="python3", 
+        resources= {'metadata': {'path': parent}}, 
+        allow_errors=True
+    )
+    print(client)
+    print("trying to execute")
+    enb = client.execute()
+    # try:
+    #     print("trying to execute")
+    #     enb = client.execute()
+    # except Exception as e:
+    #     print("exception occurred")
+    #     print(e.with_traceback )
+    #     print(notebook_filename, file=ferr)
+    #     return
+    nbformat.write(enb, notebook_filename)
+    print(notebook_filename)
+
+
 def has_no_error(x):
     for element in x:
         if "ename" in element:
@@ -120,10 +148,10 @@ def evaluate_dsp(sample_file="samples.jsonl", ks=[1, 10, 100]):
     
     pb = ProgressBar(len(ps))
     with open("errors.txt", "w") as ferr:
-        tasks_pre_launch = [execute.remote(notebook_filename, pb.actor, ferr) for notebook_filename in ps]
-        pb.print_until_done()
-        tasks = ray.get(tasks_pre_launch)
-
+        # tasks_pre_launch = [execute.remote(notebook_filename, pb.actor, ferr) for notebook_filename in ps]
+        # pb.print_until_done()
+        # tasks = ray.get(tasks_pre_launch)
+        tasks_pre_launch = [my_execute(notebook_filename, ferr) for notebook_filename in ps]
 
     # calculate pass@k.
     print("Complute pass@k for the executed notebooks.")

@@ -84,9 +84,9 @@ for result in results.values():
     correct.append(sum(passed))
 total = np.array(total)
 correct = np.array(correct)
-print("# Tests")
+print("Tests array")
 print(total)
-print("# Correct")
+print("Correct array")
 print(correct)
 
 # ks = [1, 10, 100]
@@ -94,6 +94,9 @@ ks = [1]
 pass_at_k = {f"pass@{k}": estimate_pass_at_k(total, correct, k).mean() \
                                                 for k in ks if (total >= k).all()}
 print(pass_at_k)
+
+print(f"# Tests {np.sum(total)}")
+print(f"# Correct {np.sum(correct)}")
 
 # with open("samples.jsonl", "r") as f_samples:
 #     problems = f_samples.readlines()

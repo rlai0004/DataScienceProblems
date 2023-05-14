@@ -1,0 +1,32 @@
+juice-github-repos\RuofanW.1007\DS-GA-1007-Programming-for-DS-master\02_Numpy_I_Ruofan.task_id.459.0.ipynb
+juice-github-repos\RuofanW.1007\DS-GA-1007-Programming-for-DS-master\02_Numpy_I_Ruofan.task_id.460.0.ipynb
+juice-github-repos\RuofanW.1007\DS-GA-1007-Programming-for-DS-master\02_Numpy_I_Ruofan.task_id.461.0.ipynb
+juice-github-repos\RuofanW.1007\DS-GA-1007-Programming-for-DS-master\02_Numpy_I_Ruofan.task_id.462.0.ipynb
+juice-github-repos\RuofanW.1007\DS-GA-1007-Programming-for-DS-master\02_Numpy_I_Ruofan.task_id.463.0.ipynb
+juice-github-repos\RuofanW.1007\DS-GA-1007-Programming-for-DS-master\02_Numpy_I_Ruofan.task_id.464.0.ipynb
+juice-github-repos\vlsalina.COGS108-Repo\COGS108-Repo-master\A5\A5_L7263.task_id.499.0.ipynb
+juice-github-repos\vlsalina.COGS108-Repo\COGS108-Repo-master\A5\A5_L7263.task_id.500.0.ipynb
+juice-github-repos\vlsalina.COGS108-Repo\COGS108-Repo-master\A5\A5_L7263.task_id.512.0.ipynb
+juice-github-repos\vlsalina.COGS108-Repo\COGS108-Repo-master\A5\A5_L7263.task_id.515.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\05. Support-Vector-Machines\Lab\Trees and SVMs Lab.task_id.526.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\05. Support-Vector-Machines\Lab\Trees and SVMs Lab.task_id.528.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\05. Support-Vector-Machines\Lab\Trees and SVMs Lab.task_id.529.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\03. Model-Training-and-Improvement\Lab\Model Training and Improvement Lab.task_id.531.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\03. Model-Training-and-Improvement\Lab\Model Training and Improvement Lab.task_id.532.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\03. Model-Training-and-Improvement\Lab\Model Training and Improvement Lab.task_id.534.0.ipynb
+juice-github-repos\Ventsislav-Yordanov.Machine-Learning-Softuni-Course\Machine-Learning-Softuni-Course-master\03. Model-Training-and-Improvement\Lab\Model Training and Improvement Lab.task_id.535.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.543.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.547.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.550.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.553.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.554.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.555.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.556.0.ipynb
+juice-github-repos\osunadavid.COGS108_Repo\COGS108_Repo-master\A5\A5_O5524.task_id.557.0.ipynb
+juice-github-repos\lamalor.ds100\ds100-master\lab12\lab12.task_id.677.0.ipynb
+juice-github-repos\lamalor.ds100\ds100-master\lab12\lab12.task_id.678.0.ipynb
+juice-github-repos\lamalor.ds100\ds100-master\lab12\lab12.task_id.680.0.ipynb
+juice-github-repos\lamalor.ds100\ds100-master\lab12\lab12.task_id.681.0.ipynb
+juice-github-repos\jmuresan.DATA_301_Projects\DATA_301_Projects-master\assignment04\WienerProcess.task_id.691.0.ipynb
+juice-github-repos\marcinofulus.jupyter4edu\jupyter4edu-master\katowice\introAI\kNN\kNN.task_id.885.0.ipynb
+juice-github-repos\adityassrana.BITS-F312---Neural-Networks-and-Fuzzy-Logic\BITS-F312-Neural-Networks-and-Fuzzy-Logic-master\2019\ZomatoRecommendationSystem\Assignment2.task_id.1029.0.ipynb
