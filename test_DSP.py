@@ -6,6 +6,7 @@ from collections import defaultdict
 import numpy as np
 from tqdm import tqdm
 from data_science_problems.utils import stream_jsonl, estimate_pass_at_k, reliability_guard
+import re
 
 def evaluate(path):
     path = Path(path.strip())
@@ -20,8 +21,8 @@ def evaluate(path):
             if "#### GENERATED" in source:
 #                 print(task_id)
                 test = cells_json[idx+1]["outputs"]
-                if not has_no_error(test):
-                    print(f"{task_id} had an error")
+                # if not has_no_error(test):
+                    # print(f"{task_id} had an error")
                 return has_no_error(test), task_id
             
 
@@ -42,22 +43,23 @@ with open(out_file) as f:
 error_file = "errors.txt"
 with open(error_file, "w") as ferr:
     for line in ps:
-        # notebook_filename = "juice-github-repos\mwizasimbeye11.data-science-africa-2018-abuja\data-science-africa-2018-abuja-master\PythonBasicsx.task_id.0.0.ipynb"
-        notebook_filename = Path(line.strip())
-        print(f"executing {notebook_filename}")
-        nb = nbformat.read(notebook_filename, as_version=4)
-        # print(nb)
-        parent = notebook_filename.parent
-        # print(parent)
-        client = NotebookClient(nb, 
-            timeout=10, 
-            kernel_name="python3", 
-            resources= {'metadata': {'path': parent}}, 
-            allow_errors=True
-        )
-        # print(client)
-        # print("trying to execute")
         try:
+            # notebook_filename = "juice-github-repos\mwizasimbeye11.data-science-africa-2018-abuja\data-science-africa-2018-abuja-master\PythonBasicsx.task_id.0.0.ipynb"
+            notebook_filename = Path(line.strip())
+            print(f"executing {notebook_filename}")
+            nb = nbformat.read(notebook_filename, as_version=4)
+            # print(nb)
+            parent = notebook_filename.parent
+            # print(parent)
+            client = NotebookClient(nb, 
+                timeout=10, 
+                kernel_name="python3", 
+                resources= {'metadata': {'path': parent}}, 
+                allow_errors=True
+            )
+            # print(client)
+            # print("trying to execute")
+        # try:
             enb = client.execute()
             nbformat.write(enb, notebook_filename)
         except:
@@ -73,8 +75,14 @@ with open(out_file) as f:
 
 results = defaultdict(list)
 for notebook_filename in tqdm(ps):
-    result, task_id = evaluate(notebook_filename)
-    results[task_id].append(result)
+    try:
+        result, task_id = evaluate(notebook_filename)
+        results[task_id].append(result)
+        # print(task_id)
+    except:
+        task_id = "DSP/" + re.findall("task_id\.(\d*)", notebook_filename)[0]
+        results[task_id].append(False)
+
 
 total, correct = [], []
 for result in results.values():
@@ -90,7 +98,7 @@ print("Correct array")
 print(correct)
 
 # ks = [1, 10, 100]
-ks = [1]
+ks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 pass_at_k = {f"pass@{k}": estimate_pass_at_k(total, correct, k).mean() \
                                                 for k in ks if (total >= k).all()}
 print(pass_at_k)
