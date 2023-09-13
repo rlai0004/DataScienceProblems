@@ -129,3 +129,28 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+generated_copy.txt
+samples_0_49.jsonl
+samples_1000_1049.jsonl
+samples_100_149.jsonl
+samples_1050_1099.jsonl
+samples_150_199.jsonl
+samples_200_249.jsonl
+samples_250_299.jsonl
+samples_300_349.jsonl
+samples_350_399.jsonl
+samples_400_449.jsonl
+samples_450_499.jsonl
+samples_499_500.jsonl
+samples_500_549.jsonl
+samples_50_99.jsonl
+samples_550_599.jsonl
+samples_600_649.jsonl
+samples_650_699.jsonl
+samples_700_749.jsonl
+samples_750_799.jsonl
+samples_800_849.jsonl
+samples_850_899.jsonl
+samples_900_949.jsonl
+samples_950_999.jsonl
+samples_question_refinement.jsonl
